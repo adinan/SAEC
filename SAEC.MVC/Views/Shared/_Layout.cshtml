@@ -5,8 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title</title>
 
-    @RenderSection("scripts", required: false)
-    @RenderSection("Styles", required: false)
 
     @Styles.Render("~/Content/css")
 
@@ -15,12 +13,16 @@
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/bundles/inputmask")
 
+
     <script src="~/Scripts/Comum.Config.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             ConfigurarEntrada();
         });
     </script>
+
+    @RenderSection("scripts", required: false)
+    @RenderSection("Styles", required: false)
 
 </head>
 <body>

@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using SAEC.Common.Auxiliar.Enumerators;
 
 namespace SAEC.MVC.ViewModels
 {
@@ -10,7 +11,7 @@ namespace SAEC.MVC.ViewModels
 
         [DisplayName("CPF")]
         public string Cpf { get; set; }
-        public int Sexo { get; set; }
+        public string Sexo { get; set; }
         public string Telefone { get; set; }
 
         [DisplayName("Data de Cadastro")]

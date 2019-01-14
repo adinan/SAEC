@@ -17,7 +17,7 @@
             <th data-column-id="TimeID" data-visible="false" data-visible-in-selection="false"
                 data-type="TimeID" data-identifier="true">
             </th>
-            <th data-column-id="Codigo">
+            <th data-column-id="Id">
                 @Html.DisplayNameFor(model => model.Id)
                 @Html.DisplayFor(model => model.Id)
             </th>
@@ -37,16 +37,16 @@
                 @Html.DisplayNameFor(model => model.Telefone)
                 @Html.DisplayFor(model => model.Telefone)
             </th>
-            <th data-column-id="Telefone">
+            <th data-column-id="DataCadastro">
                 @Html.DisplayNameFor(model => model.DataCadastro)
                 @Html.DisplayFor(model => model.DataCadastro)
             </th>
-            <th data-column-id="Telefone">
+            <th data-column-id="Cidade">
                 @Html.DisplayNameFor(model => model.Cidade)
                 @Html.DisplayFor(model => model.Cidade)
             </th>
-            <th data-column-id="BotaoEditar" data-visible-in-selection="false" data-formatter="BotaoEditar" data-sortable="false" data-width="100px"></th>
-            <th data-column-id="BotaoExcluir" data-visible-in-selection="false" data-formatter="BotaoExcluir" data-sortable="false" data-width="100px"></th>
+            <th data-column-id="BotaoEditar" data-visible-in-selection="false" data-formatter="BotaoEditar" data-sortable="false" data-width="60px"></th>
+            <th data-column-id="BotaoExcluir" data-visible-in-selection="false" data-formatter="BotaoExcluir" data-sortable="false" data-width="60px"></th>
         </tr>
 
     </thead>
@@ -55,7 +55,7 @@
 </style>
 
 <p>
-    @Html.ActionLink("Novo Líder", "Create", new { }, new { @class = "btn btn-default" })
+    @Html.ActionLink("Novo Aluno", "Create", new { }, new { @class = "btn btn-default" })
 </p>
 
 @section Scripts{
@@ -72,11 +72,11 @@
                 caseSensitive: false,
                 formatters: {
                     "BotaoEditar": function (column, row) {
-                        var btn = "<a class=\"btn btn-primary\" href=\"/Time/Editar/" + row.Id + "\">" + "Editar&nbsp;<span class=\" glyphicon glyphicon-info-sign\" aria-hidden=\"true\"></span>" + "</a>";
+                        var btn = "<a class=\"btn btn-primary\" href=\"/Aluno/Edit/" + row.Id + "\">" + "<span title='Editar' class=\" glyphicon glyphicon-edit\" aria-hidden=\"true\"></span>" + "</a>";
                         return btn;
                     },
                     "BotaoExcluir": function (column, row) {
-                        var btn = "<a class=\"btn btn-primary\" href=\"/Time/Excluir/" + row.Id + "\">" + "Excluir&nbsp;<span class=\" glyphicon glyphicon-info-sign\" aria-hidden=\"true\"></span>" + "</a>";
+                        var btn = "<a class=\"btn btn-primary\" href=\"/Aluno/Delete/" + row.Id + "\">" + "<span title='Exluir' class=\" glyphicon glyphicon-remove\" aria-hidden=\"true\"></span>" + "</a>";
                         return btn;
                     }
                 }

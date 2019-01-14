@@ -28,6 +28,16 @@ namespace SAEC.MVC.Controllers
             throw new NotImplementedException();
         }
 
+        public ActionResult Edit(int alunoId)
+        {
+            throw new NotImplementedException();
+        }
+
+        public ActionResult Delete(int alunoId)
+        {
+            throw new NotImplementedException();
+        }
+
         public string Grid(BootGridRequest bootgridRequest)
         {
             BootGridResponse bootGridResponse = new BootGridResponse();
@@ -66,9 +76,13 @@ namespace SAEC.MVC.Controllers
                 alunos = alunos.OrderBy(c => c.Id);
 
 
-            bootGridResponse.rows = alunos.Skip((bootgridRequest.current - 1) * bootgridRequest.rowCount)
-                .ToList().Take(bootgridRequest.rowCount).Select(AutoMapper.Mapper.Map<GridAlunoViewModel>);
-            bootGridResponse.total = alunos.Count();
+            var filtrado = alunos.ToList();
+
+            var sqv = filtrado.Skip((bootgridRequest.current - 1) * bootgridRequest.rowCount)
+                .Take(bootgridRequest.rowCount).Select(AutoMapper.Mapper.Map<GridAlunoViewModel>).ToList();
+
+            bootGridResponse.rows = sqv;
+            bootGridResponse.total = filtrado.Count;
             return JsonConvert.SerializeObject(bootGridResponse);
         }
     }
