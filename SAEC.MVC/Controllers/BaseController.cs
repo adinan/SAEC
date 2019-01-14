@@ -12,6 +12,7 @@ namespace SAEC.MVC.Controllers
             HttpSessionStateBase session = filterContext.HttpContext.Session;
             Controller controller = filterContext.Controller as Controller;
 
+            return; // TODO tirar para permissionar
             if (controller != null)
             {
                 if (session[UsuarioLogado] == null)
