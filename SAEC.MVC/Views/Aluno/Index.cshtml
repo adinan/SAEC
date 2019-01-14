@@ -1,0 +1,90 @@
+﻿@model SAEC.MVC.ViewModels.GridAlunoViewModel
+
+@{
+    ViewBag.Title = "Alunos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="text-center">Alunos</h2>
+@section Styles{
+    <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/jquery.bootgrid.min.css" rel="stylesheet" />
+}
+
+<table id="table-times" class="table table-condensed table-hover table-striped">
+    <thead>
+        <tr>
+            <th data-column-id="TimeID" data-visible="false" data-visible-in-selection="false"
+                data-type="TimeID" data-identifier="true">
+            </th>
+            <th data-column-id="Codigo">
+                @Html.DisplayNameFor(model => model.Id)
+                @Html.DisplayFor(model => model.Id)
+            </th>
+            <th data-column-id="Nome">
+                @Html.DisplayNameFor(model => model.Nome)
+                @Html.DisplayFor(model => model.Nome)
+            </th>
+            <th data-column-id="Cpf">
+                @Html.DisplayNameFor(model => model.Cpf)
+                @Html.DisplayFor(model => model.Cpf)
+            </th>
+            <th data-column-id="Sexo">
+                @Html.DisplayNameFor(model => model.Sexo)
+                @Html.DisplayFor(model => model.Sexo)
+            </th>
+            <th data-column-id="Telefone">
+                @Html.DisplayNameFor(model => model.Telefone)
+                @Html.DisplayFor(model => model.Telefone)
+            </th>
+            <th data-column-id="Telefone">
+                @Html.DisplayNameFor(model => model.DataCadastro)
+                @Html.DisplayFor(model => model.DataCadastro)
+            </th>
+            <th data-column-id="Telefone">
+                @Html.DisplayNameFor(model => model.Cidade)
+                @Html.DisplayFor(model => model.Cidade)
+            </th>
+            <th data-column-id="BotaoEditar" data-visible-in-selection="false" data-formatter="BotaoEditar" data-sortable="false" data-width="100px"></th>
+            <th data-column-id="BotaoExcluir" data-visible-in-selection="false" data-formatter="BotaoExcluir" data-sortable="false" data-width="100px"></th>
+        </tr>
+
+    </thead>
+</table>
+<style>
+</style>
+
+<p>
+    @Html.ActionLink("Novo Líder", "Create", new { }, new { @class = "btn btn-default" })
+</p>
+
+@section Scripts{
+    <script src="~/Scripts/jquery.bootgrid.min.js"></script>
+    <script src="~/Scripts/jquery.bootgrid.fa.min.js"></script>
+    <script src="~/Scripts/Jquery.bootgrid.defaults.pt-BR.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#table-times").bootgrid({
+                ajax: true,
+                url: "@Url.Action("Grid")",
+                labels: labels,
+                rowCount: rowCount,
+                caseSensitive: false,
+                formatters: {
+                    "BotaoEditar": function (column, row) {
+                        var btn = "<a class=\"btn btn-primary\" href=\"/Time/Editar/" + row.Id + "\">" + "Editar&nbsp;<span class=\" glyphicon glyphicon-info-sign\" aria-hidden=\"true\"></span>" + "</a>";
+                        return btn;
+                    },
+                    "BotaoExcluir": function (column, row) {
+                        var btn = "<a class=\"btn btn-primary\" href=\"/Time/Excluir/" + row.Id + "\">" + "Excluir&nbsp;<span class=\" glyphicon glyphicon-info-sign\" aria-hidden=\"true\"></span>" + "</a>";
+                        return btn;
+                    }
+                }
+            });
+        });
+    </script>
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
+
+

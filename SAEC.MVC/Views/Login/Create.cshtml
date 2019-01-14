@@ -1,0 +1,102 @@
+﻿@{
+    ViewBag.Title = "Me Inscrever";
+    Layout = "~/Views/Shared/_LayoutExterno.cshtml";
+}
+
+
+@*<link href="~/Content/chosen.css" rel="stylesheet" />
+<script src="~/Scripts/chosen.jquery.min.js"></script>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#Cidade").chosen({
+            no_results_text: "Sem resultados para",
+            placeholder_text_single: "Selecione uma opção",
+            placeholder_text_multiple: "Selecione as opções",
+            required: false
+        });
+</script>*@
+
+
+@model SAEC.MVC.ViewModels.UsuarioViewModel
+
+<h2>Novo Usuario</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Nome, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Cpf, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Cpf, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Cpf, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Sexo, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EnumDropDownListFor(model => model.Sexo, "Selecione", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Sexo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Telefone, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Telefone, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Telefone, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Cidade, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @*@Html.EditorFor(model => model.Cidade.Nome, new { htmlAttributes = new { @class = "form-control" } })*@
+                @Html.DropDownListFor(model => model.Cidade, (List<SelectListItem>)ViewBag.Cidades, "Selecione", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Cidade, "", new { @class = "text-danger" })
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Email, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Senha, new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.PasswordFor(model => model.Senha, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Senha, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Cadastrar" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Voltar", "Index")
+</div>

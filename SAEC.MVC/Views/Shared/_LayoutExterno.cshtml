@@ -1,0 +1,114 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title</title>
+    @RenderSection("scripts", required: false)
+    @RenderSection("Styles", required: false)
+
+    @Styles.Render("~/Content/css")
+
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/inputmask")
+
+    <link href="~/Content/chosen.css" rel="stylesheet" />
+    <script src="~/Scripts/chosen.jquery.min.js"></script>
+
+    @*<link href="~/Content/chosen.css" rel="stylesheet" />
+        <script src="~/Scripts/chosen.jquery.min.js"></script>
+
+
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $("#Cidade").chosen({
+                    no_results_text: "Sem resultados para",
+                    placeholder_text_single: "Selecione uma opção",
+                    placeholder_text_multiple: "Selecione as opções",
+                    required: false
+                });
+        </script>*@
+
+    <script src="~/Scripts/Comum.Config.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $("#Cidade").chosen({
+                no_results_text: "Sem resultados para",
+                placeholder_text_single: "Selecione uma opção",
+                placeholder_text_multiple: "Selecione as opções",
+                required: false
+            });
+
+            ConfigurarEntrada();
+        });
+    </script>
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container text-center">
+            @Html.ActionLink("SAC+E", "Index", "Login", new { area = "" }, new { @class = "navbar-brand" })
+        </div>
+    </div>
+
+    <div class="container body-content" style="padding-top: 5px">
+        @if (ViewBag.MensagensErro != null)
+        {
+            <div class="alert alert-danger" role="alert">
+
+                <ul>
+                    @if (ViewBag.MensagensErro is string)
+                    {
+                        <li>@MvcHtmlString.Create(ViewBag.MensagensErro)</li>
+                    }
+                    else if (ViewBag.MensagensErro is List<string>)
+                    {
+                        foreach (var mensagemErro in (List<string>)ViewBag.MensagensErro)
+                        {
+                            <li>@MvcHtmlString.Create(mensagemErro)</li>
+                        }
+                    }
+                    else
+                    {
+                        throw new Exception("As mensagems de erros passadas devem ser uma lista de string ou string");
+                    }
+                </ul>
+            </div>
+        }
+
+        @if (ViewBag.MensagensSucesso != null)
+        {
+            <div class="alert alert-success" role="alert">
+                <ul>
+                    @if (ViewBag.MensagensSucesso is string)
+                    {
+                        <li>@MvcHtmlString.Create(ViewBag.MensagensSucesso)</li>
+                    }
+                    else if (ViewBag.MensagensSucesso is List<string>)
+                    {
+                        foreach (var mensagemSucesso in (List<string>)ViewBag.MensagensSucesso)
+                        {
+                            <li>@MvcHtmlString.Create(mensagemSucesso)</li>
+                        }
+                    }
+                    else
+                    {
+                        throw new Exception("As mensagems de erros passadas devem ser uma lista de string ou string");
+                    }
+                </ul>
+            </div>
+        }
+
+        @RenderBody()
+
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year</p>
+        </footer>
+    </div>
+</body>
+</html>
+
