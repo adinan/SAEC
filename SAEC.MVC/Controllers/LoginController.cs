@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Web.Mvc;
 using AutoMapper;
 using SAEC.Dominio.Entidades;
@@ -37,56 +39,70 @@ namespace SAEC.MVC.Controllers
                         Session[BaseController.UsuarioLogado] = Mapper.Map<Usuario, UsuarioLogadoViewModel>(usuarioLogado);
                         return RedirectToAction("Index", "Home");
                     }
-
                 }
-
-                ViewBag.MensagensErro = "Senha ou usuario invalido";
+                TempData["MensagensErro"] = "Senha ou Usuário inválido";
                 return View();
             }
-            catch
+            catch(Exception ex)
             {
-                ViewBag.MensagensErro = "Erro operacional";
+                TempData["MensagensErro"] = ex.Message;
                 return View();
             }
         }
 
         public ActionResult Create()
         {
-            ViewBag.Cidades = _cidadeServico.ObterTodos().Select(cidade => new SelectListItem
-            {
-                Text = cidade.Nome,
-                Value = cidade.Id.ToString()
-            }).ToList();
-            
+            PopularDropDownCidade();
+
             return View();
         }
+
 
         [HttpPost]
         public ActionResult Create(UsuarioViewModel usuarioViewModel)
         {
             try
             {
+                PopularDropDownCidade();
+
                 if (ModelState.IsValid)
                 {
                     var usuario = Mapper.Map<Usuario>(usuarioViewModel);
                     _usuarioServico.Adicionar(usuario);
 
                     _usuarioServico.SalvarAlteracoes();
+                    TempData["MensagensSucesso"] = "Usuário registrado com Sucesso!";
+
                     return RedirectToAction("Index");
+
                 }
                 return View(usuarioViewModel);
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                TempData["MensagensErro"] = ex.Message;
+
+                return View(usuarioViewModel);
             }
         }
 
 
         public ActionResult Logout()
         {
-
+            Session.Clear();
+            TempData.Clear();
             return RedirectToAction("Index");
         }
+
+        private void PopularDropDownCidade()
+        {
+            ViewData["CidadeId"] = _cidadeServico.ObterTodos().OrderBy(p => p.Nome)
+                .Select(c => new SelectListItem
+                {
+                    Text = c.Nome,
+                    Value = c.Id.ToString()
+                }).ToList();
+        }
+
     }
 }

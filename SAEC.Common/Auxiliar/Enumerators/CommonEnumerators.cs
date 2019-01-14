@@ -32,6 +32,6 @@ namespace SAEC.Common.Auxiliar.Enumerators
         Masculino = 1,
 
         [Display(Name = "Feminino")]
-        Feminino11 = 2
+        Feminino = 2
     }
 }

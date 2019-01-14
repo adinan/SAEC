@@ -18,10 +18,6 @@ namespace SAEC.Dominio.Servicos
             _usuarioRepositorio = usuarioRepositorio;
         }
         
-        public IEnumerable<Usuario> ObterTodosUsuariosAtivos()
-        {
-            return _usuarioRepositorio.ObterTodosUsuariosAtivos();
-        }
 
         public Usuario Autenticar(string cpf, string senha)
         {
@@ -55,5 +51,7 @@ namespace SAEC.Dominio.Servicos
                 throw new Exception("Cpf ja cadastrado");
             _usuarioRepositorio.AddOrUpdate(usuario);
         }
+
+        
     }
 }

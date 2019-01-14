@@ -1,6 +1,8 @@
 ﻿using SAEC.Common;
 using System;
 using System.Collections.Generic;
+using System.Security.Cryptography;
+using SAEC.Common.Auxiliar.Enumerators;
 
 
 namespace SAEC.Dominio.Entidades
@@ -16,35 +18,39 @@ namespace SAEC.Dominio.Entidades
 
         public const int EnderecoMaxLength = 254;
         public string Email { get; private set; }
-
-
-        public int Sexo { get; private set; }
+        
+        public ESexo Sexo { get; private set; }
         public string Telefone { get; private set; }
-        public int Cidade { get; private set; }
+
+        public const int TamnhoSenhaMinima = 4;
         public string Senha { get; private set; }
+
+        public int CidadeId { get; private set ; }
+
+        public virtual Cidade Cidade { get; set; }
         public virtual ICollection<ResponsavelAluno> ResponsavelAluno { get; set; }
 
         //utilizada pelo EF
-        //protected Usuario()
-        //{
-            
-        //}
+        protected Usuario()
+        {
 
-        public Usuario(string nome, string cpf, int sexo, string tel, int cidade, string email, string senha)
+        }
+
+        public Usuario(string nome, string cpf, ESexo sexo, string telefone, int cidade, string email, string senha)
         {
             SetNome(nome);
             SetCpf(cpf);
             SetSexo(sexo);
-            SetTel(tel);
+            SetTel(telefone);
             SetCidade(cidade);
             SetEmail(email);
             SetSenha(senha);
         }
 
-        private void SetTel(string tel)
+        private void SetTel(string telefone)
         {
-            if (!tel.IsNullOrWhiteSpace())
-                Telefone = tel;
+            if (!telefone.IsNullOrWhiteSpace())
+                Telefone = telefone.Replace("(", "").Replace(")", "").Replace("-", "");
             else
                 throw new Exception("Telefone inválido");
         }
@@ -59,6 +65,7 @@ namespace SAEC.Dominio.Entidades
 
         private void SetNome(string nome)
         {
+            nome = nome.Trim();
             if (nome.IsNullOrWhiteSpace())
                 throw new Exception("Nome inválido.");
             if (nome.Length < NomeMinLength)
@@ -72,12 +79,12 @@ namespace SAEC.Dominio.Entidades
         private void SetCpf(string cpf)
         {
             if (!cpf.IsNullOrWhiteSpace())
-                Cpf = cpf;
+                Cpf = cpf.Replace(".", "").Replace("-", "");
             else
                 throw new Exception("Cpf inválido");
         }
 
-        private void SetSexo(int sexo)
+        private void SetSexo(ESexo sexo)
         {
             if (sexo > 0)
                 Sexo = sexo;
@@ -88,7 +95,7 @@ namespace SAEC.Dominio.Entidades
         private void SetCidade(int cidade)
         {
             if (cidade > 0)
-                Cidade = cidade;
+                CidadeId = cidade;
             else
                 throw new Exception("Selecione a Cidade");
         }
@@ -96,9 +103,24 @@ namespace SAEC.Dominio.Entidades
         private void SetSenha(string senha)
         {
             if (senha.Length > 4)
-                Senha = senha;
+                Senha = CriptografaSenha(senha);
             else
                 throw new Exception("Senha deve ter no minio 4 caracteres");
+        }
+
+        private string CriptografaSenha(string senha)
+        {
+            byte[] salt;
+            new RNGCryptoServiceProvider().GetBytes(salt = new byte[16]);
+            var pbkdf2 = new Rfc2898DeriveBytes(senha, salt, 10000);
+
+            var hash = pbkdf2.GetBytes(20);
+            var hashbytes = new byte[36];
+
+            Array.Copy(salt, 0, hashbytes, 0, 16);
+            Array.Copy(hash, 0, hashbytes, 16, 20);
+
+            return Convert.ToBase64String(hashbytes);
         }
 
     }

@@ -1,5 +1,7 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.Web.Mvc;
 using SAEC.Common.Auxiliar.Enumerators;
 using SAEC.Dominio.Entidades;
 using SAEC.MVC.ViewModels.Validacoes;
@@ -30,17 +32,18 @@ namespace SAEC.MVC.ViewModels
         public string Telefone { get; set; }
 
         [Required(ErrorMessage = "Preencha o campo Cidade")]
+        public int CidadeId { get; set; }
         public Cidade Cidade { get; set; }
 
+
         [Required(ErrorMessage = "Preencha o campo E-mail")]
-        [MaxLength(Usuario.EnderecoMaxLength, ErrorMessage = "Máximo {1} caracteres"),]
         [EmailAddress(ErrorMessage = "E-mail inválido")]
         [DisplayName("E-mail")]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Preencha o campo Senha")]
+        [MinLength(Usuario.TamnhoSenhaMinima, ErrorMessage = "Mínimo {1} caracteres")]
         public string Senha { get; set; }
-
     }
 
 

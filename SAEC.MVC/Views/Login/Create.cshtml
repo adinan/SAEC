@@ -4,20 +4,6 @@
 }
 
 
-@*<link href="~/Content/chosen.css" rel="stylesheet" />
-<script src="~/Scripts/chosen.jquery.min.js"></script>
-
-
-<script type="text/javascript">
-    $(document).ready(function () {
-        $("#Cidade").chosen({
-            no_results_text: "Sem resultados para",
-            placeholder_text_single: "Selecione uma opção",
-            placeholder_text_multiple: "Selecione as opções",
-            required: false
-        });
-</script>*@
-
 
 @model SAEC.MVC.ViewModels.UsuarioViewModel
 
@@ -66,10 +52,9 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Cidade, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @*@Html.EditorFor(model => model.Cidade.Nome, new { htmlAttributes = new { @class = "form-control" } })*@
-                @Html.DropDownListFor(model => model.Cidade, (List<SelectListItem>)ViewBag.Cidades, "Selecione", new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.Cidade, "", new { @class = "text-danger" })
+                @Html.DropDownListFor(model => model.CidadeId, (List<SelectListItem>)ViewData["CidadeId"], "Selecione", new { @class = "form-control" })
 
+                @Html.ValidationMessageFor(model => model.CidadeId, "", new { @class = "text-danger" })
             </div>
         </div>
 

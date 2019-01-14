@@ -64,6 +64,10 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <ProjectReference Include="..\SAEC.Common\SAEC.Common.csproj">
+      <Project>{186C7C49-CCD4-4995-AB91-2D07F0174A0D}</Project>
+      <Name>SAEC.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SAEC.Dominio\SAEC.Dominio.csproj">
       <Project>{418D3CB2-ECFC-4D74-A8FC-C058EBB2CBEC}</Project>
       <Name>SAEC.Dominio</Name>

@@ -4,8 +4,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title</title>
-    @RenderSection("scripts", required: false)
-    @RenderSection("Styles", required: false)
+    @RenderSection("scripts", false)
+    @RenderSection("Styles", false)
 
     @Styles.Render("~/Content/css")
 
@@ -17,25 +17,11 @@
     <link href="~/Content/chosen.css" rel="stylesheet" />
     <script src="~/Scripts/chosen.jquery.min.js"></script>
 
-    @*<link href="~/Content/chosen.css" rel="stylesheet" />
-        <script src="~/Scripts/chosen.jquery.min.js"></script>
-
-
-        <script type="text/javascript">
-            $(document).ready(function () {
-                $("#Cidade").chosen({
-                    no_results_text: "Sem resultados para",
-                    placeholder_text_single: "Selecione uma opção",
-                    placeholder_text_multiple: "Selecione as opções",
-                    required: false
-                });
-        </script>*@
-
     <script src="~/Scripts/Comum.Config.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
 
-            $("#Cidade").chosen({
+            $("#CidadeId").chosen({
                 no_results_text: "Sem resultados para",
                 placeholder_text_single: "Selecione uma opção",
                 placeholder_text_multiple: "Selecione as opções",
@@ -55,18 +41,18 @@
     </div>
 
     <div class="container body-content" style="padding-top: 5px">
-        @if (ViewBag.MensagensErro != null)
+        @if (TempData["MensagensErro"] != null)
         {
             <div class="alert alert-danger" role="alert">
 
                 <ul>
-                    @if (ViewBag.MensagensErro is string)
+                    @if (TempData["MensagensErro"] is string)
                     {
-                        <li>@MvcHtmlString.Create(ViewBag.MensagensErro)</li>
+                        <li>@MvcHtmlString.Create((string)TempData["MensagensErro"])</li>
                     }
-                    else if (ViewBag.MensagensErro is List<string>)
+                    else if (TempData["MensagensErro"] is List<string>)
                     {
-                        foreach (var mensagemErro in (List<string>)ViewBag.MensagensErro)
+                        foreach (var mensagemErro in (List<string>)TempData["MensagensErro"])
                         {
                             <li>@MvcHtmlString.Create(mensagemErro)</li>
                         }
@@ -79,17 +65,17 @@
             </div>
         }
 
-        @if (ViewBag.MensagensSucesso != null)
+        @if (TempData["MensagensSucesso"] != null)
         {
             <div class="alert alert-success" role="alert">
                 <ul>
-                    @if (ViewBag.MensagensSucesso is string)
+                    @if (TempData["MensagensSucesso"] is string)
                     {
-                        <li>@MvcHtmlString.Create(ViewBag.MensagensSucesso)</li>
+                        <li>@MvcHtmlString.Create((string)TempData["MensagensSucesso"])</li>
                     }
-                    else if (ViewBag.MensagensSucesso is List<string>)
+                    else if (TempData["MensagensSucesso"] is List<string>)
                     {
-                        foreach (var mensagemSucesso in (List<string>)ViewBag.MensagensSucesso)
+                        foreach (var mensagemSucesso in (List<string>)TempData["MensagensSucesso"])
                         {
                             <li>@MvcHtmlString.Create(mensagemSucesso)</li>
                         }
