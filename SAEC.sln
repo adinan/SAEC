@@ -5,8 +5,6 @@ VisualStudioVersion = 15.0.27703.2000
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1 - Apresentação", "1 - Apresentação", "{B3ADFB68-8CD3-4084-B75F-79B8345F2079}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 - Aplicação", "2 - Aplicação", "{282A7823-F456-439C-8E6B-BC6D80FD7E65}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - Domínio", "3 - Domínio", "{F1E335D8-8A45-45E3-A3B7-7C062D82C373}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4 - InfraEstrutura", "4 - InfraEstrutura", "{4423DF1A-2028-41C5-8BE4-54086079B396}"
@@ -24,6 +22,11 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SAEC.InfraEstrutura.IoC", "SAEC.InfraEstrutura.IoC\SAEC.InfraEstrutura.IoC.csproj", "{70EA5639-8981-44A4-BF80-295AB6A55DFE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SAEC.InfraEstrutura.Data", "SAEC.InfraEstrutura.Data\SAEC.InfraEstrutura.Data.csproj", "{41CA2FFB-F547-4BD6-90C4-AFD735DF8C8E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5 - Docmentos", "5 - Docmentos", "{707928F2-1A50-492E-B1DE-6896A4D5D41C}"
+	ProjectSection(SolutionItems) = preProject
+		BD.sql = BD.sql
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

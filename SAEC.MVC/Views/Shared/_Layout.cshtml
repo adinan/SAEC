@@ -21,8 +21,8 @@
         });
     </script>
 
-    @RenderSection("scripts", required: false)
-    @RenderSection("Styles", required: false)
+    @RenderSection("scripts", false)
+    @RenderSection("Styles", false)
 
 </head>
 <body>
@@ -38,8 +38,8 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Cadastrar Alunos", "Index", "Aluno")</li>
-                    <li>@Html.ActionLink("Cadastrar Cidades", "Index", "Cidade")</li>
+                    <li>@Html.ActionLink("Alunos", "Index", "Aluno")</li>
+                    <li>@Html.ActionLink("Cidades", "Index", "Cidade")</li>
                     <li>@Html.ActionLink("Alunos por Cidade", "Index", "Cidade")</li>
                     <li>@Html.ActionLink("Relatórios", "Index", "Relatorio")</li>
                     <li>@Html.ActionLink("Gráficos", "Index", "Grafico")</li>
